@@ -1,5 +1,5 @@
 
-# In the project directory, you can run:
+# In the CLIENT directory, you can run:
 
 
 ## Instalation

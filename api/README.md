@@ -1,5 +1,5 @@
 
-# In the api directory, you can run:
+# In the API directory, you can run:
 
 
 ## Instalation
