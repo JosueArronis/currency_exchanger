@@ -4,8 +4,8 @@ import ResultSection from '../resultSection/ResultSection';
 
 const Home = () => {
   const [convertions, setConvertions] = useState({
-      conversion_rate: 0,
-      conversion_result: 0
+      exchangeRate: 0,
+      quoteAmount: 0
   });
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +19,7 @@ const Home = () => {
     <Fragment>
       <div className='card grid-2'>   
         <RateSection  resultsExchange={resultsExchange}  handleLoading={handleLoading}/>
-        <ResultSection loading={loading} conversion_rate={convertions.conversion_rate} conversion_result={convertions.conversion_result} /> 
+        <ResultSection loading={loading} conversion_rate={convertions.exchangeRate} conversion_result={convertions.quoteAmount} /> 
       </div>
     </Fragment>
   )

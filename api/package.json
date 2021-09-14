@@ -1,0 +1,26 @@
+{
+  "name": "currency_exchanger_api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node dist/index",
+    "debug": "nodemon dist/index",
+    "build:dev": "rm -rf dist && tsc"
+  },
+  "author": "Josue Arronis",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "config": "^3.3.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "helmet": "^4.6.0"
+  },
+  "devDependencies": {
+    "@types/config": "^0.0.39",
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13"
+  }
+}

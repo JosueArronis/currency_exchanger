@@ -1,9 +1,6 @@
-import React, {useEffect, useState, useContext} from 'react'
+import React, { useState} from 'react'
 import SelectSearch, {fuzzySearch} from 'react-select-search';
-import AlertContext from '../../context/alert/alertContext';
-import {getCodes} from '../../services/Codes';
 import {getExchangeRate} from '../../services/Exchange';
-
 interface IRateSectionProps {
     resultsExchange: Function;
     handleLoading: Function;
@@ -12,25 +9,29 @@ interface IRateSectionProps {
 const RateSection = (props: IRateSectionProps) => {
 
 const  {resultsExchange, handleLoading} = props;   
-const alertContext = useContext(AlertContext);
-const [codes, setCodes] = useState([]);
+const [codes] = useState([
+    {
+        name: 'USD',
+        value: 'USD'
+    },
+    {
+        name: 'EUR',
+        value: 'EUR'
+    },
+    {
+        name: 'GBP',
+        value: 'GBP'
+    },
+    {
+        name: 'ILS',
+        value: 'ILS'
+    },
+]);
 const [selectedCode, setSelectedCode] = useState({
     base: '',
     quote: '',
     amount: 0
 });
-
-useEffect(() => {
-   const load_codes = async () => {
-       try {
-           const data = await getCodes();
-           setCodes(data);
-       } catch (error) {
-        alertContext.setAlert('Error loading codes', 'danger', 3000);
-       }
-   }
-    load_codes();
-}, [alertContext])
 
 const handleChangeBase = (selectedOption) => {
     setSelectedCode({...selectedCode, base: selectedOption});

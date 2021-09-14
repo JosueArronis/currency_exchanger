@@ -1,0 +1,6 @@
+{
+  "port": 5000,
+  "environment": "Development",
+  "api_exchange_key": "6af991231397116b706e7f9c",
+  "exchange_api_base_url": "https://v6.exchangerate-api.com/v6/"
+}

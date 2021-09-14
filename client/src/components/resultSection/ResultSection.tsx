@@ -14,7 +14,7 @@ const ResultSection = (props) => {
                             <input className="input_disable" type='number' name='conversion_rate' value={conversion_rate} disabled/>
                         </div>
                         <div className='form-group'>
-                            <label htmlFor='conversion_result'>Conversion Result</label>
+                            <label htmlFor='conversion_result'>Conversion Result in cents</label>
                             <input className="input_disable" type='number' name='conversion_result' value={conversion_result} disabled/>
                         </div>
                     </>
