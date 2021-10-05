@@ -14,7 +14,6 @@ router.get('/',validations, validationsHandler, async (req: Request, res: Respon
     let response = {} as ResponseInterface;
     const amount = parseFloat(baseAmount as string);
     const result = await getExchangeRate(baseCurrency as string, quoteCurrency as string, amount);
-    console.log(result);
     response = {
       exchangeRate: parseFloat(result.conversion_rate.toFixed(3)),
       quoteAmount: parseFloat((result.conversion_result * 100).toFixed(3)),
