@@ -12,8 +12,6 @@ if (!port) {
 }
 const PORT: number = parseInt(port as string, 10);
 
-// const db_connectio = new DB_Connection();
-// db_connectio.connect_db();
 /**
  * Server Activation
  */
