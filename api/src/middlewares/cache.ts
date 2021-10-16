@@ -1,16 +1,17 @@
-import NodeCache from 'node-cache';
+
 import { Request, Response, NextFunction } from 'express';
 import { ResponseInterface } from '../interfaces/response_interface';
 import { ApiError, handleError } from '../error';
 import { IcacheResult } from '../interfaces/cache_result_interface';
-
-export const cache = new NodeCache({ stdTTL: 15 }); // Just for example can configure it to get more time cache
+import { dataCache } from '../utils/dataCache';
 
 export const verifyCache = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { baseCurrency, quoteCurrency, baseAmount } = req.query;
-    if (cache.has(`${baseCurrency}_${quoteCurrency}`)) {
-      const cache_result: IcacheResult | undefined = cache.get(`${baseCurrency}_${quoteCurrency}`);
+    if (dataCache.has(`${baseCurrency}_${quoteCurrency}`)) {
+      const cache_result: IcacheResult | undefined = dataCache.get(
+        `${baseCurrency}_${quoteCurrency}`
+      );
       if (cache_result) {
         const response = {
           exchangeRate: parseFloat(cache_result.conversion_rate.toFixed(3)),

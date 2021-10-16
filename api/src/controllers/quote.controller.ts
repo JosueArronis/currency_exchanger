@@ -4,8 +4,8 @@ import { ResponseInterface } from '../interfaces/response_interface';
 import { getExchangeRate } from '../services/Exchange';
 import  validationsHandler  from '../middlewares/validator';
 import  validations  from '../middlewares/quote.validations';
-import { cache, verifyCache } from '../middlewares/cache';
-
+import { verifyCache } from '../middlewares/cache';
+import { dataCache } from '../utils/dataCache';
 const router = Router();
 
 router.get(
@@ -25,7 +25,7 @@ router.get(
         base_code: result.base_code,
         target_code: result.target_code,
       };
-      cache.set(`${result.base_code}_${result.target_code}`, {
+      dataCache.set(`${result.base_code}_${result.target_code}`, {
         conversion_rate: parseFloat(result.conversion_rate.toFixed(3)),
         base_code: result.base_code,
         target_code: result.target_code,
