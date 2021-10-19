@@ -21,7 +21,7 @@ router.get(
       const result = await getExchangeRate(baseCurrency as string, quoteCurrency as string, amount);
       response = {
         exchangeRate: parseFloat(result.conversion_rate.toFixed(3)),
-        quoteAmount: parseFloat((result.conversion_result * 100).toFixed(3)),
+        quoteAmount: parseInt((result.conversion_result * 100).toFixed(3)),
         base_code: result.base_code,
         target_code: result.target_code,
       };
