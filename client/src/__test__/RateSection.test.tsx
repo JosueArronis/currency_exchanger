@@ -35,8 +35,7 @@ describe('RateSection', () => {
     expect(SelectQuote).toHaveValue('EUR');
     const amountInput = screen.getByTestId('amount-input');
     userEvent.type(amountInput, '100');
-    const buttonInput = screen.getByTestId('button-input');
-    userEvent.click(buttonInput);
+   
     // expect(spy).toHaveBeenCalledTimes(1);
     // spy.mockRestore();
   });

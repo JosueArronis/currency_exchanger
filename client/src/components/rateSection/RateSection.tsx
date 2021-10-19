@@ -41,12 +41,11 @@ const RateSection = (props: IRateSectionProps) => {
   const handleChangeAmount = (e) => {
     setSelectedCode({
       ...selectedCode,
-      [e.target.name]: isNaN(parseFloat(e.target.value)) ? 0 : parseFloat(e.target.value),
+      [e.target.name]: isNaN(parseInt(e.target.value)) ? 0 : parseInt(e.target.value),
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleExchange = async () => {
     handleLoading(true);
     const result = await getExchangeRate(
       selectedCode.base,
@@ -56,12 +55,11 @@ const RateSection = (props: IRateSectionProps) => {
     resultsExchange(result);
     handleLoading(false);
   };
-
   /* Simple example */
   return (
     <div className='form-container'>
       <h3> Rate Section </h3>
-      <form onSubmit={handleSubmit} data-testid='from-rate' className='form'>
+      <form data-testid='from-rate' className='form'>
         <SelectSearch
           data-testid='baseC-input'
           options={codes}
@@ -87,33 +85,14 @@ const RateSection = (props: IRateSectionProps) => {
             selectedCode.base.length === 0 || selectedCode.quote.length === 0 ? 'input_disable' : ''
           }
           type='number'
-          step='.01'
           name='amount'
           placeholder='Base Amount'
           min='0'
+          onKeyUp={handleExchange}
           onChange={handleChangeAmount}
           disabled={
             selectedCode.base.length === 0 || selectedCode.quote.length === 0 ? true : false
           }
-        />
-        <input
-          data-testid='button-input'
-          className={`btn btn-primary btn-sm ${
-            selectedCode.base.length === 0 ||
-            selectedCode.quote.length === 0 ||
-            selectedCode.amount <= 0
-              ? 'btn-disable'
-              : ''
-          }`}
-          disabled={
-            selectedCode.base.length === 0 ||
-            selectedCode.quote.length === 0 ||
-            selectedCode.amount <= 0
-              ? true
-              : false
-          }
-          type='submit'
-          value='Calculate'
         />
       </form>
     </div>

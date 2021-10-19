@@ -7,7 +7,7 @@ export const getExchangeRate = async (from: string, to: string, amount: number) 
     if (session_exchange !== null) { 
         return {
             exchangeRate: parseFloat(JSON.parse(session_exchange).exchangeRate.toFixed(3)),
-            quoteAmount:  parseFloat((JSON.parse(session_exchange).exchangeRate * amount * 100).toFixed(3)),
+            quoteAmount:  parseInt((JSON.parse(session_exchange).exchangeRate * amount * 100).toFixed(3)),
         }
     } else  {
         const response = await axios.get(`${url}`, {
