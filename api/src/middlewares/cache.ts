@@ -15,8 +15,8 @@ export const verifyCache = (req: Request, res: Response, next: NextFunction) => 
       if (cache_result) {
         const response = {
           exchangeRate: parseFloat(cache_result.conversion_rate.toFixed(3)),
-          quoteAmount: parseFloat(
-            (cache_result.conversion_rate * parseFloat(baseAmount as string) * 100).toFixed(3)
+          quoteAmount: parseInt(
+            (cache_result.conversion_rate * parseInt(baseAmount as string) * 100).toFixed(3)
           ),
           base_code: cache_result.base_code,
           target_code: cache_result.target_code,
