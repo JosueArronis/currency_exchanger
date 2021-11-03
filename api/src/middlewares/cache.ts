@@ -3,14 +3,18 @@ import { Request, Response, NextFunction } from 'express';
 import { ResponseInterface } from '../interfaces/response_interface';
 import { ApiError, handleError } from '../error';
 import { IcacheResult } from '../interfaces/cache_result_interface';
-import { dataCache } from '../utils/dataCache';
+
+import  LRUCache from '../utils/lruCache';
+
+
+export const cacheLayer = new LRUCache(4);
 
 export const verifyCache = (req: Request, res: Response, next: NextFunction) => {
   try {
     const { baseCurrency, quoteCurrency, baseAmount } = req.query;
-    if (dataCache.has(`${baseCurrency}_${quoteCurrency}`)) {
-      const cache_result: IcacheResult | undefined = dataCache.get(
-        `${baseCurrency}_${quoteCurrency}`
+    if (cacheLayer.get(`${baseCurrency}_${quoteCurrency}`)) {
+      const cache_result: IcacheResult | undefined = JSON.parse(
+        cacheLayer.get(`${baseCurrency}_${quoteCurrency}`)
       );
       if (cache_result) {
         const response = {

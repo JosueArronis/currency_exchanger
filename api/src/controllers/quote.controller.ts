@@ -4,8 +4,8 @@ import { ResponseInterface } from '../interfaces/response_interface';
 import { getExchangeRate } from '../services/Exchange';
 import  validationsHandler  from '../middlewares/validator';
 import  validations  from '../middlewares/quote.validations';
-import { verifyCache } from '../middlewares/cache';
-import { dataCache } from '../utils/dataCache';
+import { verifyCache, cacheLayer } from '../middlewares/cache';
+
 const router = Router();
 
 router.get(
@@ -25,11 +25,14 @@ router.get(
         base_code: result.base_code,
         target_code: result.target_code,
       };
-      dataCache.set(`${result.base_code}_${result.target_code}`, {
-        conversion_rate: parseFloat(result.conversion_rate.toFixed(3)),
-        base_code: result.base_code,
-        target_code: result.target_code,
-      });
+      cacheLayer.set(
+        `${result.base_code}_${result.target_code}`,
+        JSON.stringify({
+          conversion_rate: parseFloat(result.conversion_rate.toFixed(3)),
+          base_code: result.base_code,
+          target_code: result.target_code,
+        })
+      );
       res.status(200).json(response);
     } catch (error) {
       const custom = new ApiError(0, 'Error');
